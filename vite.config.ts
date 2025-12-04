@@ -8,6 +8,7 @@ export default defineConfig(({ mode }) => {
       server: {
         port: 10000,
         host: '0.0.0.0',
+        allowedHosts: ["agricola-matteo-corona.onrender.com"]
       },
       plugins: [react()],
       define: {
