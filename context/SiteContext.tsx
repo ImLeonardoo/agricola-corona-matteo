@@ -57,7 +57,7 @@ const defaultSiteData = {
       id: '4',
       name: 'Fieno',
       description: 'Produzione di foraggio di prima scelta per allevamenti.',
-      image: 'https://i.ibb.co/pjxBmR0J/Screenshot-2025-12-04-185410.png',
+      image: 'https://i.ibb.co/KZN6McF/Screenshot-2025-12-04-185308.png',
       category: 'Altro'
     }
   ] as Product[],
