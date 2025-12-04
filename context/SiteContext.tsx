@@ -18,11 +18,11 @@ const defaultSiteData = {
     instagram: '#',
   },
   images: {
-    homeHero: 'https://picsum.photos/seed/farmfield/1920/1080',
-    aboutHero: 'https://picsum.photos/seed/farmer/800/800',
+    homeHero: 'https://i.ibb.co/0yBZGSD0/Immagine-Whats-App-2025-12-02-ore-20-52-50-74426538.jpg',
+    aboutHero: 'https://i.ibb.co/1frYkRpP/Screenshot-2025-12-04-130519.png',
     aboutHeroPosition: '50% 50%', // center center
-    storeHero: 'https://picsum.photos/seed/storefront/1920/1080',
-    logo: '' // empty string means use default SVG component
+    storeHero: 'https://i.ibb.co/FbP27q0J/Immagine-Whats-App-2025-12-02-ore-20-52-50-195b65bd.jpg',
+    logo: 'https://i.ibb.co/1f3Y2p05/Immagine-Whats-App-2025-12-04-ore-12-46-22-8ef191e0.jpg' // empty string means use default SVG component
   },
   colors: {
     farmGreen: '#2F5233',
@@ -36,28 +36,28 @@ const defaultSiteData = {
       id: '1',
       name: 'Ortaggi di Stagione',
       description: 'Verdure fresche coltivate in pieno campo, seguendo i ritmi naturali delle stagioni.',
-      image: 'https://picsum.photos/seed/veg/600/400',
+      image: 'https://i.ibb.co/pjxBmR0J/Screenshot-2025-12-04-185410.png',
       category: 'Ortaggi'
     },
     {
       id: '2',
       name: 'Mais Zootecnico',
       description: 'Mais di alta qualità per alimentazione animale, prodotto nei nostri terreni.',
-      image: 'https://picsum.photos/seed/corn/600/400',
+      image: 'https://www.mangimiealimenti.it/wp-content/uploads/2021/03/mais_coltura_pixabay.png',
       category: 'Cereali'
     },
     {
       id: '3',
       name: 'Farine Macinate a Pietra',
       description: 'Farine integrali e semi-integrali ottenute dai nostri cereali locali.',
-      image: 'https://picsum.photos/seed/flour/600/400',
+      image: 'https://i.ibb.co/YBpyRkcm/image.png',
       category: 'Farine'
     },
     {
       id: '4',
       name: 'Fieno',
       description: 'Produzione di foraggio di prima scelta per allevamenti.',
-      image: 'https://picsum.photos/seed/hay/600/400',
+      image: 'https://i.ibb.co/pjxBmR0J/Screenshot-2025-12-04-185410.png',
       category: 'Altro'
     }
   ] as Product[],
