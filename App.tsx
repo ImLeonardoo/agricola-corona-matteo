@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { HashRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
-import { Menu, X, MapPin, Phone, Mail, Instagram, Facebook, Tractor, Wheat, Snowflake, Store, Sprout, ArrowRight, Lock } from 'lucide-react';
+import { Menu, X, MapPin, Phone, Mail, Instagram, Facebook, Tractor, Wheat, Snowflake, Store, Sprout, ArrowRight, ShoppingBag, Utensils, Leaf, Star, Beef, Milk } from 'lucide-react';
 import RecipeGenerator from './components/RecipeGenerator';
-import AdminPage from './pages/AdminPage';
 import Logo from './components/Logo';
+import ImageCarousel from './components/ImageCarousel';
 import { SiteProvider, useSiteContext } from './context/SiteContext';
 
 // --- Constants ---
@@ -11,8 +11,8 @@ import { SiteProvider, useSiteContext } from './context/SiteContext';
 const NAV_LINKS = [
   { label: 'Home', path: '/' },
   { label: 'Chi Siamo', path: '/chi-siamo' },
-  { label: 'Prodotti e Servizi', path: '/prodotti' },
   { label: 'Punto Vendita', path: '/store' },
+  { label: 'Prodotti e Servizi', path: '/prodotti' },
   { label: 'Contatti', path: '/contatti' },
 ];
 
@@ -21,7 +21,6 @@ const NAV_LINKS = [
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-  const { data } = useSiteContext();
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50 font-sans transition-colors">
@@ -123,9 +122,6 @@ const Footer = () => {
       </div>
       <div className="mt-8 border-t border-white/20 pt-8 flex justify-center items-center gap-4 text-xs text-gray-400">
         <span>© {new Date().getFullYear()} Azienda Agricola Corona Matteo. Tutti i diritti riservati.</span>
-        <Link to="/admin" className="text-white/20 hover:text-white transition" title="Accesso Admin">
-          <Lock className="w-3 h-3" />
-        </Link>
       </div>
     </footer>
   );
@@ -221,7 +217,7 @@ const AboutPage = () => {
           <div className="space-y-6">
             <h3 className="text-2xl font-bold text-gray-800">Matteo Corona</h3>
             <p className="text-lg text-gray-600 leading-relaxed">
-              Sono un giovane imprenditore agricolo di 26 anni, originario di questo splendido territorio. 
+              Sono un giovane imprenditore agricolo di 27 anni, originario di questo splendido territorio. 
               La mia avventura è iniziata presto: a soli 18 anni ho deciso di trasformare la mia passione per la terra in un lavoro, fondando la mia azienda.
             </p>
             <p className="text-lg text-gray-600 leading-relaxed">
@@ -246,46 +242,51 @@ const ProductsPage = () => {
   <div className="pt-10 pb-20 animate-fade-in bg-farm-cream transition-colors">
     <div className="max-w-7xl mx-auto px-4">
       <div className="text-center mb-16">
-        <h2 className="text-4xl font-serif font-bold text-farm-green">Le Nostre Attività</h2>
+        <h2 className="text-4xl font-serif font-bold text-farm-green">Prodotti e Servizi</h2>
         <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
           Dalla coltivazione alla vendita, ci occupiamo di ogni fase con cura e dedizione.
+          <br className="hidden md:block"/> 
+          <strong>Forniamo all'ingrosso mercati e supermercati ogni giorno, garantendo freschezza e qualità costante.</strong>
         </p>
       </div>
 
-      {/* Products Grid */}
-      <h3 className="text-2xl font-bold text-farm-brown mb-8 border-l-4 border-farm-light-green pl-4">Produzione Agricola</h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+      {/* Products Grid Layout (Restored) */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-20">
         {data.products.map((product) => (
-          <div key={product.id} className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all group">
-            <div className="h-48 overflow-hidden">
-              <img 
-                src={product.image} 
-                alt={product.name} 
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-            </div>
-            <div className="p-6">
-              <h4 className="font-serif font-bold text-lg text-gray-800 mb-2">{product.name}</h4>
-              <p className="text-sm text-gray-600">{product.description}</p>
-            </div>
+          <div key={product.id} className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group">
+             <div className="h-64 overflow-hidden">
+               <img 
+                 src={product.image} 
+                 alt={product.name} 
+                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+               />
+             </div>
+             <div className="p-8">
+               <span className="text-farm-light-green font-bold tracking-widest text-xs uppercase mb-2 block">{product.category}</span>
+               <h3 className="text-2xl font-serif font-bold text-gray-800 mb-4">{product.name}</h3>
+               <p className="text-gray-600 leading-relaxed">{product.description}</p>
+             </div>
           </div>
         ))}
       </div>
 
       {/* Services Section */}
-      <h3 className="text-2xl font-bold text-farm-brown mb-8 border-l-4 border-farm-light-green pl-4">Servizi</h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {data.services.map((service) => (
-          <div key={service.id} className="bg-farm-green text-white p-8 rounded-xl flex items-start gap-6 shadow-lg transition-colors">
-            <div className="bg-white/20 p-4 rounded-lg">
-              {service.iconName === 'Snowflake' ? <Snowflake className="w-8 h-8" /> : <Tractor className="w-8 h-8" />}
-            </div>
-            <div>
-              <h4 className="text-xl font-bold mb-2">{service.name}</h4>
-              <p className="text-gray-100 opacity-90">{service.description}</p>
-            </div>
-          </div>
-        ))}
+      <div className="bg-farm-green rounded-3xl p-8 md:p-16 text-white shadow-2xl">
+         <div className="text-center mb-12">
+           <h3 className="text-3xl font-serif font-bold">I Nostri Servizi</h3>
+           <p className="text-white/80 mt-2">Professionalità al servizio del territorio</p>
+         </div>
+         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {data.services.map((service) => (
+              <div key={service.id} className="bg-white/10 p-8 rounded-xl backdrop-blur-sm border border-white/10 hover:bg-white/20 transition-colors">
+                <div className="bg-white text-farm-green w-12 h-12 rounded-lg flex items-center justify-center mb-6">
+                  {service.iconName === 'Snowflake' ? <Snowflake className="w-6 h-6" /> : <Tractor className="w-6 h-6" />}
+                </div>
+                <h4 className="text-xl font-bold mb-3">{service.name}</h4>
+                <p className="text-white/80">{service.description}</p>
+              </div>
+            ))}
+         </div>
       </div>
     </div>
   </div>
@@ -294,15 +295,27 @@ const ProductsPage = () => {
 
 const StorePage = () => {
   const { data } = useSiteContext();
+  const [activeTab, setActiveTab] = useState<'fruitVeg' | 'preserves' | 'flour' | 'meat' | 'cheese'>('fruitVeg');
+  
+  // Tabs configuration
+  const tabs = [
+    { id: 'fruitVeg', label: 'Frutta & Verdura', icon: Leaf },
+    { id: 'preserves', label: 'Conserve', icon: Star },
+    { id: 'flour', label: 'Farine', icon: Wheat },
+    { id: 'meat', label: 'Carni', icon: Beef },
+    { id: 'cheese', label: 'Formaggi', icon: Milk },
+  ] as const;
+
   return (
     <div className="pt-10 pb-20 animate-fade-in">
       <div className="max-w-7xl mx-auto px-4">
         {/* Header Banner for Store */}
-        <div className="relative rounded-3xl overflow-hidden mb-16 shadow-2xl h-80 md:h-[500px]">
+        <div className="relative rounded-3xl overflow-hidden mb-16 shadow-2xl h-80 md:h-[450px]">
           <img 
             src={data.images.storeHero} 
             alt="Negozio Interno" 
             className="w-full h-full object-cover"
+            style={{ objectPosition: data.images.storeHeroPosition || 'center center' }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-8 md:p-16">
             <span className="bg-farm-light-green text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest w-fit mb-4">Nuova Apertura</span>
@@ -313,61 +326,105 @@ const StorePage = () => {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-16">
-          <div>
-            <h3 className="text-3xl font-serif font-bold text-farm-green mb-6">Sapori a Km 0</h3>
-            <p className="text-gray-600 text-lg leading-relaxed mb-6">
+        {/* Intro Section */}
+        <div className="grid md:grid-cols-3 gap-12 mb-20 items-start">
+          <div className="md:col-span-2">
+            <h3 className="text-3xl font-serif font-bold text-farm-green mb-6 flex items-center gap-3">
+              <ShoppingBag className="w-8 h-8" />
+              Sapori a Km 0
+            </h3>
+            <p className="text-gray-600 text-lg leading-relaxed mb-8">
               Nel nostro nuovo punto vendita puoi trovare tutto il sapore della nostra terra. 
               Abbiamo selezionato per voi i migliori prodotti, trasformati con metodi artigianali o raccolti freschi ogni mattina.
+              Un luogo dove la qualità incontra la tradizione.
             </p>
-            <ul className="space-y-4">
-              {[
-                "Farine di cereali locali",
-                "Pasta artigianale",
-                "Frutta e verdura di stagione",
-                "Legumi secchi",
-                "Prodotti sott’olio",
-                "Specialità locali"
-              ].map((item, i) => (
-                <li key={i} className="flex items-center gap-3 text-gray-700 bg-farm-cream p-3 rounded-lg border border-farm-beige">
-                  <div className="w-2 h-2 rounded-full bg-farm-light-green"></div>
-                  {item}
-                </li>
-              ))}
-            </ul>
+            
+            {/* Categories Grid - REPLACES LIST */}
+            <div className="grid grid-cols-2 sm:grid-cols-2 gap-4">
+               {[
+                 { icon: Wheat, label: "Farine Locali", desc: "Da cereali nostrani" },
+                 { icon: Utensils, label: "Pasta Artigianale", desc: "Trafilata al bronzo" },
+                 { icon: Leaf, label: "Frutta e Verdura", desc: "Fresca di giornata" },
+                 { icon: Star, label: "Specialità", desc: "Sott'olio e conserve" },
+               ].map((item, i) => (
+                 <div key={i} className="flex items-start gap-4 p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div className="bg-farm-beige p-3 rounded-full text-farm-green">
+                      <item.icon className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-gray-800">{item.label}</h4>
+                      <p className="text-xs text-gray-500">{item.desc}</p>
+                    </div>
+                 </div>
+               ))}
+            </div>
           </div>
-          <div className="bg-farm-beige p-8 rounded-2xl border border-farm-brown/10 shadow-inner transition-colors">
-            <h3 className="text-2xl font-bold text-farm-brown mb-6">Vieni a trovarci!</h3>
-            <p className="mb-6 text-gray-700">
-              Siamo aperti per offrirti il meglio della produzione locale. Passa a trovarci per scoprire le offerte della settimana.
+
+          {/* Call to Action Box */}
+          <div className="bg-farm-green text-white p-8 rounded-2xl shadow-xl transform rotate-1 hover:rotate-0 transition-transform">
+            <h3 className="text-2xl font-bold mb-6 font-serif">Vieni a trovarci!</h3>
+            <p className="mb-6 text-white/90">
+              Siamo aperti per offrirti il meglio della produzione locale.
             </p>
-            <div className="space-y-4">
+            <div className="space-y-4 mb-8">
               <div className="flex items-start gap-4">
-                  <MapPin className="w-6 h-6 text-farm-green mt-1" />
+                  <MapPin className="w-6 h-6 mt-1 text-farm-light-green" />
                   <div>
-                    <p className="font-bold text-gray-800">Indirizzo</p>
-                    <p className="text-gray-600">{data.contacts.address}, {data.contacts.city}</p>
+                    <p className="font-bold">Indirizzo</p>
+                    <p className="text-white/80 text-sm">{data.contacts.address},<br/>{data.contacts.city}</p>
                   </div>
               </div>
               <div className="flex items-start gap-4">
-                  <Phone className="w-6 h-6 text-farm-green mt-1" />
+                  <Phone className="w-6 h-6 mt-1 text-farm-light-green" />
                   <div>
-                    <p className="font-bold text-gray-800">Telefono</p>
-                    <p className="text-gray-600 text-sm italic">{data.contacts.phone || "(Numero non disponibile online, passa in negozio!)"}</p>
+                    <p className="font-bold">Telefono</p>
+                    <p className="text-white/80 text-sm">{data.contacts.phone || "Vieni in sede"}</p>
                   </div>
               </div>
             </div>
-            <div className="mt-8">
-              <a 
-                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(data.contacts.address + ' ' + data.contacts.city)}`} 
-                target="_blank" 
-                rel="noreferrer"
-                className="block w-full text-center bg-farm-green text-white py-3 rounded-lg font-bold hover:bg-emerald-900 transition-colors"
-              >
-                Ottieni Indicazioni Stradali
-              </a>
-            </div>
+            <a 
+              href="https://maps.app.goo.gl/dcYsUymcZuD3z45W8"
+              target="_blank" 
+              rel="noreferrer"
+              className="block w-full text-center bg-white text-farm-green py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors"
+            >
+              Ottieni Indicazioni
+            </a>
           </div>
+        </div>
+
+        {/* Gallery Carousel with Tabs */}
+        <div className="mb-20">
+           <div className="text-center mb-8">
+             <span className="text-farm-light-green font-bold tracking-wider uppercase text-xs">Esplora il negozio</span>
+             <h3 className="text-3xl font-serif font-bold text-farm-green mb-6">Galleria Fotografica</h3>
+             
+             {/* Tabs */}
+             <div className="flex flex-wrap justify-center gap-2 mb-8">
+                {tabs.map(tab => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold transition-all ${
+                      activeTab === tab.id 
+                      ? 'bg-farm-green text-white shadow-lg scale-105' 
+                      : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'
+                    }`}
+                  >
+                    <tab.icon className="w-4 h-4" />
+                    {tab.label}
+                  </button>
+                ))}
+             </div>
+           </div>
+           
+           <div className="w-full max-w-2xl mx-auto shadow-2xl rounded-2xl">
+             <ImageCarousel images={data.storeGalleries[activeTab]} />
+           </div>
+           
+           {data.storeGalleries[activeTab].length === 0 && (
+             <p className="text-center text-gray-400 text-sm mt-4 italic">Nessuna immagine in questa categoria.</p>
+           )}
         </div>
       </div>
     </div>
@@ -433,8 +490,8 @@ const App: React.FC = () => {
       <HashRouter>
         <div className="min-h-screen flex flex-col font-sans text-gray-800 selection:bg-farm-light-green selection:text-white">
           <Routes>
-            <Route path="/admin" element={<AdminPage />} />
-            <Route path="*" element={
+             {/* Admin Route Removed */}
+             <Route path="*" element={
               <>
                 <Header />
                 <main className="flex-grow">

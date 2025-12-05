@@ -6,9 +6,8 @@ export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, '.', '');
     return {
       server: {
-        port: 10000,
+        port: 3000,
         host: '0.0.0.0',
-        allowedHosts: ["agricola-matteo-corona.onrender.com"]
       },
       plugins: [react()],
       define: {
